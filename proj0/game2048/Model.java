@@ -107,12 +107,16 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      * */
     public boolean tilt(Side side) {
+        if(side==Side.WEST)board.setViewingPerspective(Side.WEST);
+        if(side==Side.SOUTH)board.setViewingPerspective(Side.SOUTH);
+        if(side==Side.EAST)board.setViewingPerspective(Side.EAST);
+
         boolean changed;
         changed = false;
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-        for(int c=0;c< board.size();c++) {
+       for(int c=0;c< board.size();c++) {
             int m1= board.size();
             int m2= board.size();
             for(int r= board.size()-1;r>=0;r--){
@@ -121,32 +125,48 @@ public class Model extends Observable {
                 if(t==null)continue;
                 m2=m1;
                 for(int z=r+1;z<m2;z++){
+               //     if(z>=board.size())continue;
                     Tile tt =board.tile(c,z);
                     if(tt!=null) {
                         if(tt.value()==t.value()){
+                            if(z!=r)changed=true;
                         board.move(c,z,t);
                         score +=tt.value()*2;
-                        m1=r;
+                        m1=z;
                         flag = true;
                         break;
-                    }
+                         }
                     else  {
+                        if((z-1)!=r)changed=true;
                         board.move(c,(z-1),t);
                         flag=true;
                         break;
                         }
                     }
                 }
-                if(!flag)board.move(c,3,t);
-            }
+                if(!flag){
+                    if((m2-1)!=r)changed=true;
+                    board.move(c,m2-1,t);
 
+                }
+            }
         }
+
+        /*test exercise
+        for(int i=0;i<4;i++){
+            for(int j=0;j<4;j++){
+                Tile t =board.tile(i,j);
+                if(t==null)continue;
+                board.move(i,3,t);
+                changed =true;
+            }
+        }
+        */
         checkGameOver();
-        if(!gameOver) changed=true;
-        changed=true;
         if (changed) {
             setChanged();
         }
+        board.setViewingPerspective(Side.NORTH);
         return changed;
     }
 
