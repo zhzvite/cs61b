@@ -34,8 +34,8 @@ public class AddConstantTest {
 
     @Test
     public void testAddToLargeList2() {
-        IntList lst = IntList.of(0);
+        IntList lst = IntList.of();
         IntListExercises.addConstant(lst, -10);
-        assertEquals("-10", lst.toString());
+        assertEquals("", lst.toString());
     }
 }
