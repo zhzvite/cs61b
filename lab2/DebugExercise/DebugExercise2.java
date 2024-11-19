@@ -4,16 +4,10 @@ package DebugExercise;
  * Exercise to showcase the step over button.
  * Code adapted from https://stackoverflow.com/questions/4895173/bitwise-multiply-and-add-in-java and https://stackoverflow.com/questions/1533131/what-useful-bitwise-operator-code-tricks-should-a-developer-know-about
  */
-public class   DebugExercise2 {
+public class DebugExercise2 {
     /** Returns the max of a and b. Do not step into this function. */
     public static int max(int a, int b) {
-        int w = (b - a) >> 31;
-        /* If you're stepping into this function, click the
-           step out button because you're not going to learn anything. */
-        int z = ~(b - a) >> 31;
-
-        int max = b & w | a & z;
-        return max;
+        return Math.max(a, b);
     }
 
 
@@ -46,12 +40,8 @@ public class   DebugExercise2 {
         }
         int[] returnArray = new int[a.length];
         for (int i = 0; i < a.length; i += 1) {
-            if(a[i]>b[i])returnArray[i]=a[i];
-            else returnArray[i]=b[i];
-//            int biggerValue = max(a[i], b[i]);
-//            if(biggerValue==a[i])biggerValue=b[i];
-//            else biggerValue=a[i];
- //           returnArray[i] = biggerValue;
+            int biggerValue = max(a[i], b[i]);
+            returnArray[i] = biggerValue;
         }
 
         return returnArray;
@@ -62,7 +52,7 @@ public class   DebugExercise2 {
         int i = 0;
         int sum = 0;
         while (i < x.length) {
-            sum+=x[i];
+            sum = add(sum, x[i]);
             i = i + 1;
         }
         return sum;
@@ -80,8 +70,8 @@ public class   DebugExercise2 {
 
 
     public static void main(String[] args) {
-        int[] a = {2, 0, 10, 14};
-        int[] b = {-5, 5, 20, 30};
+        int[] a = {1, 11, -1, -11};
+        int[] b = {3, -3, 2, -1};
 
         int sumOfElementwiseMaxes = sumOfElementwiseMaxes(a, b);
         System.out.println(sumOfElementwiseMaxes);
