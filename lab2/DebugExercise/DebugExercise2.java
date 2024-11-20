@@ -7,12 +7,7 @@ package DebugExercise;
 public class   DebugExercise2 {
     /** Returns the max of a and b. Do not step into this function. */
     public static int max(int a, int b) {
-        int w = (b - a) >> 31;
-        /* If you're stepping into this function, click the
-           step out button because you're not going to learn anything. */
-        int z = ~(b - a) >> 31;
-
-        int max = b & w | a & z;
+     int max =Math.max(a,b);
         return max;
     }
 
@@ -46,12 +41,8 @@ public class   DebugExercise2 {
         }
         int[] returnArray = new int[a.length];
         for (int i = 0; i < a.length; i += 1) {
-            if(a[i]>b[i])returnArray[i]=a[i];
-            else returnArray[i]=b[i];
-//            int biggerValue = max(a[i], b[i]);
-//            if(biggerValue==a[i])biggerValue=b[i];
-//            else biggerValue=a[i];
- //           returnArray[i] = biggerValue;
+            int biggerValue = max(a[i], b[i]);
+            returnArray[i] = biggerValue;
         }
 
         return returnArray;
